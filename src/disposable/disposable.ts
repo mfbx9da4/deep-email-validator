@@ -33,5 +33,6 @@ export const checkDisposable = async (
   domain: string
 ): Promise<string | undefined> => {
   if (disposableDomains.size === 0) await loadDisposableDomains()
-  if (disposableDomains.has(domain)) return 'Is disposable email'
+  if (disposableDomains.has(domain))
+    return 'Email was created using a disposable email service'
 }

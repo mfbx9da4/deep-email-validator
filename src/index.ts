@@ -1,3 +1,4 @@
+import isEmail from 'validator/lib/isEmail'
 import { OutputFormat, createOutput } from './output/output'
 import { checkTypo } from './typo/typo'
 import { getBestMx } from './dns/dns'
@@ -15,26 +16,18 @@ export async function validate(
   recipient: string,
   sender: string = 'name@example.org'
 ): Promise<OutputFormat> {
-  if (!/^\S+@\S+$/.test(recipient)) {
-    return createOutput('regex')
-  }
+  if (!isEmail(recipient)) return createOutput('regex')
 
   const typoResponse = await checkTypo(recipient)
-  if (typoResponse) {
-    return createOutput('typo', typoResponse)
-  }
+  if (typoResponse) return createOutput('typo', typoResponse)
 
   const domain = recipient.split('@')[1]
 
   const disposableResponse = await checkDisposable(domain)
-  if (disposableResponse) {
-    return createOutput('disposable', disposableResponse)
-  }
+  if (disposableResponse) return createOutput('disposable', disposableResponse)
 
   const mx = await getBestMx(domain)
-  if (!mx) {
-    return createOutput('mx', 'MX record not found')
-  }
+  if (!mx) return createOutput('mx', 'MX record not found')
 
   return checkSMTP(sender, recipient, mx.exchange)
 }

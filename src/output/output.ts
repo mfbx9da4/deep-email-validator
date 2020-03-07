@@ -10,7 +10,6 @@ const NullOutputFormat = {
     typo: { valid: true } as ValidatorOutput,
     disposable: { valid: true } as ValidatorOutput,
     mx: { valid: true } as ValidatorOutput,
-    dns: { valid: true } as ValidatorOutput,
     smtp: { valid: true } as ValidatorOutput,
   },
 }
