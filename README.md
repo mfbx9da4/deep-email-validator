@@ -1,6 +1,5 @@
 # Email Validator
 
-
 Validates emails based on regex, common typos, disposable email blacklists, DNS records and SMTP server response.
 
 - Validates email is compliant with RFC standard using regex.
@@ -11,9 +10,15 @@ Validates emails based on regex, common typos, disposable email blacklists, DNS 
 - Validates mailbox exists on SMTP server.
 - Native typescript support.
 
+## Getting Started
+
+Install like so
+
 ```
 yarn add deep-email-validator
 ```
+
+Use like so
 
 ```typescript
 import validate from 'deep-email-validator'
