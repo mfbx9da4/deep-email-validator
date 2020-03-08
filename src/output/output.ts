@@ -1,37 +1,45 @@
-export type ValidatorOutput = {
+import { ElementType } from '../types'
+
+const OrderedLevels = ['regex', 'typo', 'disposable', 'mx', 'smtp'] as const
+
+export type SubOutputFormat = {
   valid: boolean
   reason?: string
 }
 
-const NullOutputFormat = {
+const NullOutputFormat: OutputFormat = {
   valid: true,
   validators: {
-    regex: { valid: true } as ValidatorOutput,
-    typo: { valid: true } as ValidatorOutput,
-    disposable: { valid: true } as ValidatorOutput,
-    mx: { valid: true } as ValidatorOutput,
-    smtp: { valid: true } as ValidatorOutput,
+    regex: { valid: true },
+    typo: { valid: true },
+    disposable: { valid: true },
+    mx: { valid: true },
+    smtp: { valid: true },
   },
 }
-
-export type OutputFormat = typeof NullOutputFormat
-
-type Levels = keyof OutputFormat['validators']
+type Level = ElementType<typeof OrderedLevels>
+export type OutputFormat = SubOutputFormat & {
+  validators: {
+    [K in Level]: SubOutputFormat
+  }
+}
 
 export const createOutput = (
-  failLevel?: Levels,
+  failLevel?: Level,
   failReason?: string
 ): OutputFormat => {
-  const levels = Object.typedKeys(NullOutputFormat.validators)
-  const out: OutputFormat = NullOutputFormat
-  for (let i = 0; i < levels.length; i++) {
-    const level = levels[i]
+  const out = NullOutputFormat
+  let valid = true
+  for (let i = 0; i < OrderedLevels.length; i++) {
+    const level = OrderedLevels[i]
     let reason
     if (level === failLevel) {
-      out.valid = false
+      valid = false
+      out.valid = valid
       reason = failReason
+      out.reason = failLevel
     }
-    out.validators[level] = { valid: out.valid, reason }
+    out.validators[level] = { valid: valid, reason }
   }
   return out
 }

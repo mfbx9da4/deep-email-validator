@@ -1,13 +1,23 @@
 {
-  "name": "email-validator",
-  "version": "0.1.0",
+  "name": "deep-email-validator",
+  "version": "0.1.2",
   "description": "Validates emails based on regex, common typos, disposable email blacklists, DNS records and SMTP server response.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/mfbx9da4/email-validator"
   },
   "author": "David Alberto Adler",
   "license": "MIT",
+  "keywords": [
+    "email-validation",
+    "email-typos",
+    "email-regex",
+    "disposable-emails",
+    "smtp",
+    "mx-records"
+  ],
   "scripts": {
     "start": "yarn serve",
     "build": "tsc",

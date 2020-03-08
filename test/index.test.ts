@@ -10,11 +10,17 @@ describe('validation tests', () => {
     const res = await validate('david@gmaill.com')
     expect(res).toMatchSnapshot()
   })
-  // it('fails with bad dns', async () => {
-  //   const res = await validate('david@capoeira.london')
-  //   expect(res).toMatchSnapshot()
-  // })
-  it('fails with bad username', async () => {
+  it('fails with disposable email', async () => {
+    const res = await validate('david@temp-mail.org')
+    expect(res).toMatchSnapshot()
+  })
+
+  it('fails with bad dns', async () => {
+    const res = await validate('david@finance.net')
+    expect(res).toMatchSnapshot()
+  })
+
+  it('fails with bad mailbox', async () => {
     const res = await validate('david@andco.life')
     expect(res).toMatchSnapshot()
   })
