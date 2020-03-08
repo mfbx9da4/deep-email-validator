@@ -4,19 +4,13 @@ import { checkTypo } from './typo/typo'
 import { getBestMx } from './dns/dns'
 import { checkSMTP } from './smtp/smtp'
 import { checkDisposable } from './disposable/disposable'
-
-declare global {
-  interface ObjectConstructor {
-    typedKeys<T>(o: T): Array<keyof T>
-  }
-}
-Object.typedKeys = Object.keys as any
+import './types'
 
 export async function validate(
   recipient: string,
   sender: string = 'name@example.org'
 ): Promise<OutputFormat> {
-  if (!isEmail(recipient)) return createOutput('regex')
+  if (!isEmail(recipient)) return createOutput('regex', 'Invalid regex')
 
   const typoResponse = await checkTypo(recipient)
   if (typoResponse) return createOutput('typo', typoResponse)

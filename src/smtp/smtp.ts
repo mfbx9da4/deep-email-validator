@@ -2,6 +2,12 @@ import net from 'net'
 import { OutputFormat, createOutput } from '../output/output'
 import { hasCode, ErrorCodes } from './errorCodes'
 
+const log = (...args: unknown[]) => {
+  if (process.env.DEBUG === 'true') {
+    console.log(...args)
+  }
+}
+
 export const checkSMTP = async (
   sender: string,
   recipient: string,
@@ -13,7 +19,7 @@ export const checkSMTP = async (
     socket.setEncoding('ascii')
     socket.setTimeout(timeout)
     socket.on('error', error => {
-      console.log('error', error)
+      log('error', error)
       socket.emit('fail', error)
     })
 
@@ -51,7 +57,7 @@ export const checkSMTP = async (
 
     socket.on('connect', () => {
       socket.on('data', msg => {
-        console.log('data', msg)
+        log('data', msg)
         if (hasCode(msg, 220) || hasCode(msg, 250)) {
           socket.emit('next', msg)
         } else if (hasCode(msg, 550)) {

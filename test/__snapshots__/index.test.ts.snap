@@ -1,0 +1,141 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`validation tests bad username 1`] = `
+Object {
+  "valid": false,
+  "validators": Object {
+    "disposable": Object {
+      "reason": undefined,
+      "valid": false,
+    },
+    "mx": Object {
+      "reason": undefined,
+      "valid": false,
+    },
+    "regex": Object {
+      "reason": undefined,
+      "valid": false,
+    },
+    "smtp": Object {
+      "reason": "Invalid Mailbox",
+      "valid": false,
+    },
+    "typo": Object {
+      "reason": undefined,
+      "valid": false,
+    },
+  },
+}
+`;
+
+exports[`validation tests fails with bad dns 1`] = `
+Object {
+  "valid": false,
+  "validators": Object {
+    "disposable": Object {
+      "reason": undefined,
+      "valid": false,
+    },
+    "mx": Object {
+      "reason": "MX record not found",
+      "valid": false,
+    },
+    "regex": Object {
+      "reason": undefined,
+      "valid": false,
+    },
+    "smtp": Object {
+      "reason": undefined,
+      "valid": false,
+    },
+    "typo": Object {
+      "reason": undefined,
+      "valid": false,
+    },
+  },
+}
+`;
+
+exports[`validation tests fails with bad regex 1`] = `
+Object {
+  "valid": false,
+  "validators": Object {
+    "disposable": Object {
+      "reason": undefined,
+      "valid": false,
+    },
+    "mx": Object {
+      "reason": undefined,
+      "valid": false,
+    },
+    "regex": Object {
+      "reason": "Invalid regex",
+      "valid": false,
+    },
+    "smtp": Object {
+      "reason": undefined,
+      "valid": false,
+    },
+    "typo": Object {
+      "reason": undefined,
+      "valid": false,
+    },
+  },
+}
+`;
+
+exports[`validation tests fails with bad username 1`] = `
+Object {
+  "valid": false,
+  "validators": Object {
+    "disposable": Object {
+      "reason": undefined,
+      "valid": false,
+    },
+    "mx": Object {
+      "reason": undefined,
+      "valid": false,
+    },
+    "regex": Object {
+      "reason": undefined,
+      "valid": false,
+    },
+    "smtp": Object {
+      "reason": "Invalid Mailbox",
+      "valid": false,
+    },
+    "typo": Object {
+      "reason": undefined,
+      "valid": false,
+    },
+  },
+}
+`;
+
+exports[`validation tests fails with common typo 1`] = `
+Object {
+  "valid": false,
+  "validators": Object {
+    "disposable": Object {
+      "reason": undefined,
+      "valid": false,
+    },
+    "mx": Object {
+      "reason": undefined,
+      "valid": false,
+    },
+    "regex": Object {
+      "reason": undefined,
+      "valid": false,
+    },
+    "smtp": Object {
+      "reason": undefined,
+      "valid": false,
+    },
+    "typo": Object {
+      "reason": "Likely typo, suggested email: david@gmail.com",
+      "valid": false,
+    },
+  },
+}
+`;

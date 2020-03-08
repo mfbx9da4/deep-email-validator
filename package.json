@@ -1,21 +1,28 @@
 {
   "name": "email-validator",
   "version": "0.1.0",
-  "description": "Email Validator",
+  "description": "Validates emails based on regex, common typos, disposable email blacklists, DNS records and SMTP server response.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mfbx9da4"
+    "url": "https://github.com/mfbx9da4/email-validator"
   },
-  "author": "David Adler",
+  "author": "David Alberto Adler",
   "license": "MIT",
   "scripts": {
-    "start": "npm run serve",
+    "start": "yarn serve",
+    "build": "tsc",
+    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
+    "prepare": "yarn build",
+    "prepublishOnly": "yarn test && yarn lint",
+    "preversion": "yarn lint",
+    "version": "yarn format && git add -A src",
+    "postversion": "git push && git push --tags",
     "watch-node": "nodemon dist/index.js",
     "test": "jest --verbose",
-    "watch-test": "npm run test -- --watchAll",
+    "watch-test": "yarn test -- --watchAll",
     "watch-ts": "tsc -w",
     "lint": "tsc --noEmit && eslint \"**/*.{js,ts}\" --quiet --fix",
-    "debug": "npm run build && npm run watch-debug",
+    "debug": "yarn build && yarn watch-debug",
     "run-debug": "nodemon --inspect dist/server.js"
   },
   "dependencies": {
