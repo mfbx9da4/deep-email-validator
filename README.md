@@ -12,3 +12,31 @@
 ```
 yarn add deep-email-validator
 ```
+
+```typescript
+import validate from 'deep-email-validator'
+const main = async () => {
+  let res = await validate('asdf@gmail.com')
+  // {
+  //   "valid": false,
+  //   "validators": {
+  //       "regex": {
+  //         "valid": true
+  //       },
+  //       "typo": {
+  //         "valid": true
+  //       },
+  //       "disposable": {
+  //         "valid": true
+  //       },
+  //       "mx": {
+  //         "valid": true
+  //       },
+  //       "smtp": {
+  //         "valid": false,
+  //         "reason": "Invalid Mailbox",
+  //       }
+  //   }
+  // }
+}
+```

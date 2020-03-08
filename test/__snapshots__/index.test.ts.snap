@@ -144,3 +144,32 @@ Object {
   },
 }
 `;
+
+exports[`validation tests passes 1`] = `
+Object {
+  "reason": "smtp",
+  "valid": false,
+  "validators": Object {
+    "disposable": Object {
+      "reason": undefined,
+      "valid": true,
+    },
+    "mx": Object {
+      "reason": undefined,
+      "valid": true,
+    },
+    "regex": Object {
+      "reason": undefined,
+      "valid": true,
+    },
+    "smtp": Object {
+      "reason": undefined,
+      "valid": true,
+    },
+    "typo": Object {
+      "reason": undefined,
+      "valid": true,
+    },
+  },
+}
+`;
