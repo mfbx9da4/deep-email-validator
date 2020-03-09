@@ -1,6 +1,6 @@
 {
   "name": "deep-email-validator",
-  "version": "0.1.5",
+  "version": "0.1.7",
   "files": [
     "dist/**/*"
   ],
@@ -9,7 +9,7 @@
   "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mfbx9da4/email-validator"
+    "url": "https://github.com/mfbx9da4/deep-email-validator"
   },
   "author": "David Alberto Adler",
   "license": "MIT",
