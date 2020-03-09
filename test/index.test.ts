@@ -26,8 +26,18 @@ describe('validation tests', () => {
     expect(res).toMatchSnapshot()
   })
 
+  it('fails with bad mailbox', async () => {
+    const res = await validate('admin@github.com')
+    expect(res).toMatchSnapshot()
+  })
+
   it('passes', async () => {
-    const res = await validate('davidadler@gmail.com')
+    const res = await validate('~@oftn.org')
+    expect(res).toMatchSnapshot()
+  })
+
+  it('passes', async () => {
+    const res = await validate('info@davidalbertoadler.com')
     expect(res).toMatchSnapshot()
   })
 })
