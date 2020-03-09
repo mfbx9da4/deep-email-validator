@@ -27,8 +27,7 @@ describe('validation tests', () => {
   })
 
   it('passes', async () => {
-    const res = await validate('bcooney@gmail.com')
-    console.log('res', res)
+    const res = await validate('davidadler@gmail.com')
     expect(res).toMatchSnapshot()
   })
 })
