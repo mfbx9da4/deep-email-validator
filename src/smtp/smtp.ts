@@ -31,10 +31,10 @@ export const checkSMTP = async (
     })
 
     socket.on('success', () => {
-      r(createOutput())
       socket.write(`quit\r\n`)
       socket.end()
       socket.destroy()
+      r(createOutput())
     })
 
     const commands = [

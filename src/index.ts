@@ -10,6 +10,7 @@ export async function validate(
   recipient: string,
   sender: string = 'name@example.org'
 ): Promise<OutputFormat> {
+  console.log('recipient', recipient)
   if (!isEmail(recipient)) return createOutput('regex', 'Invalid regex')
 
   const typoResponse = await checkTypo(recipient)

@@ -6,23 +6,19 @@ Object {
   "valid": false,
   "validators": Object {
     "disposable": Object {
-      "reason": undefined,
       "valid": true,
     },
     "mx": Object {
       "reason": "MX record not found",
-      "valid": false,
+      "valid": true,
     },
     "regex": Object {
-      "reason": undefined,
       "valid": true,
     },
     "smtp": Object {
-      "reason": undefined,
       "valid": false,
     },
     "typo": Object {
-      "reason": undefined,
       "valid": true,
     },
   },
@@ -35,23 +31,19 @@ Object {
   "valid": false,
   "validators": Object {
     "disposable": Object {
-      "reason": undefined,
       "valid": true,
     },
     "mx": Object {
-      "reason": undefined,
       "valid": true,
     },
     "regex": Object {
-      "reason": undefined,
       "valid": true,
     },
     "smtp": Object {
       "reason": "Invalid Mailbox",
-      "valid": false,
+      "valid": true,
     },
     "typo": Object {
-      "reason": undefined,
       "valid": true,
     },
   },
@@ -64,23 +56,19 @@ Object {
   "valid": false,
   "validators": Object {
     "disposable": Object {
-      "reason": undefined,
       "valid": false,
     },
     "mx": Object {
-      "reason": undefined,
       "valid": false,
     },
     "regex": Object {
       "reason": "Invalid regex",
-      "valid": false,
+      "valid": true,
     },
     "smtp": Object {
-      "reason": undefined,
       "valid": false,
     },
     "typo": Object {
-      "reason": undefined,
       "valid": false,
     },
   },
@@ -93,24 +81,20 @@ Object {
   "valid": false,
   "validators": Object {
     "disposable": Object {
-      "reason": undefined,
       "valid": false,
     },
     "mx": Object {
-      "reason": undefined,
       "valid": false,
     },
     "regex": Object {
-      "reason": undefined,
       "valid": true,
     },
     "smtp": Object {
-      "reason": undefined,
       "valid": false,
     },
     "typo": Object {
       "reason": "Likely typo, suggested email: david@gmail.com",
-      "valid": false,
+      "valid": true,
     },
   },
 }
@@ -123,22 +107,18 @@ Object {
   "validators": Object {
     "disposable": Object {
       "reason": "Email was created using a disposable email service",
-      "valid": false,
+      "valid": true,
     },
     "mx": Object {
-      "reason": undefined,
       "valid": false,
     },
     "regex": Object {
-      "reason": undefined,
       "valid": true,
     },
     "smtp": Object {
-      "reason": undefined,
       "valid": false,
     },
     "typo": Object {
-      "reason": undefined,
       "valid": true,
     },
   },
@@ -147,27 +127,21 @@ Object {
 
 exports[`validation tests passes 1`] = `
 Object {
-  "reason": "smtp",
-  "valid": false,
+  "valid": true,
   "validators": Object {
     "disposable": Object {
-      "reason": undefined,
       "valid": true,
     },
     "mx": Object {
-      "reason": undefined,
       "valid": true,
     },
     "regex": Object {
-      "reason": undefined,
       "valid": true,
     },
     "smtp": Object {
-      "reason": undefined,
       "valid": true,
     },
     "typo": Object {
-      "reason": undefined,
       "valid": true,
     },
   },

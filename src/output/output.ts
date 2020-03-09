@@ -7,20 +7,10 @@ export type SubOutputFormat = {
   reason?: string
 }
 
-const NullOutputFormat: OutputFormat = {
-  valid: true,
-  validators: {
-    regex: { valid: true },
-    typo: { valid: true },
-    disposable: { valid: true },
-    mx: { valid: true },
-    smtp: { valid: true },
-  },
-}
 type Level = ElementType<typeof OrderedLevels>
 export type OutputFormat = SubOutputFormat & {
   validators: {
-    [K in Level]: SubOutputFormat
+    [K in Level]?: SubOutputFormat
   }
 }
 
@@ -28,18 +18,20 @@ export const createOutput = (
   failLevel?: Level,
   failReason?: string
 ): OutputFormat => {
-  const out = NullOutputFormat
+  const out: OutputFormat = { valid: true, validators: {} }
+  if (failLevel) {
+    out.reason = failLevel
+    out.valid = false
+  }
   let valid = true
   for (let i = 0; i < OrderedLevels.length; i++) {
     const level = OrderedLevels[i]
-    let reason
+    const levelOut: SubOutputFormat = { valid }
     if (level === failLevel) {
       valid = false
-      out.valid = valid
-      reason = failReason
-      out.reason = failLevel
+      levelOut.reason = failReason
     }
-    out.validators[level] = { valid: valid, reason }
+    out.validators[level] = levelOut
   }
   return out
 }
