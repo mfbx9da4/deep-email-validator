@@ -1,3 +1,5 @@
+import values from 'lodash/values'
+import every from 'lodash/every'
 import { validate } from '../src/index'
 
 const elevenSeconds = 11 * 1000
@@ -6,6 +8,8 @@ describe('validation tests', () => {
   it('fails with bad regex', async () => {
     const res = await validate('dav id@gmail.com')
     expect(res.valid).toBe(false)
+    expect(res.reason).toBe('regex')
+    expect(res.validators.regex?.valid).toBe(false)
     expect(res).toMatchSnapshot()
   })
 
@@ -15,18 +19,25 @@ describe('validation tests', () => {
       validateRegex: false,
     })
     expect(res.valid).toBe(false)
+    expect(res.reason).toBe('smtp')
+    expect(res.validators.regex?.valid).toBe(true)
+    expect(res.validators.smtp?.valid).toBe(false)
     expect(res).toMatchSnapshot()
   })
 
   it('fails with common typo', async () => {
     const res = await validate('david@gmaill.com')
     expect(res.valid).toBe(false)
+    expect(res.reason).toBe('typo')
+    expect(res.validators.typo?.valid).toBe(false)
     expect(res).toMatchSnapshot()
   })
 
   it('fails with disposable email', async () => {
     const res = await validate('david@temp-mail.org')
     expect(res.valid).toBe(false)
+    expect(res.reason).toBe('disposable')
+    expect(res.validators.disposable?.valid).toBe(false)
     expect(res).toMatchSnapshot()
   })
 
@@ -35,6 +46,8 @@ describe('validation tests', () => {
     async () => {
       const res = await validate('xxx@yyy.zzz')
       expect(res.valid).toBe(false)
+      expect(res.reason).toBe('mx')
+      expect(res.validators.mx?.valid).toBe(false)
       expect(res).toMatchSnapshot()
     },
     elevenSeconds
@@ -43,6 +56,8 @@ describe('validation tests', () => {
   it('fails with bad mailbox', async () => {
     const res = await validate('david@andco.life')
     expect(res.valid).toBe(false)
+    expect(res.reason).toBe('smtp')
+    expect(res.validators.smtp?.valid).toBe(false)
     expect(res).toMatchSnapshot()
   })
 
@@ -51,6 +66,8 @@ describe('validation tests', () => {
     async () => {
       const res = await validate('admin@github.com')
       expect(res.valid).toBe(false)
+      expect(res.reason).toBe('smtp')
+      expect(res.validators.smtp?.valid).toBe(false)
       expect(res).toMatchSnapshot()
     },
     elevenSeconds
@@ -63,7 +80,8 @@ describe('validation tests', () => {
         email: 'admin@github.com',
         validateSMTP: false,
       })
-
+      expect(res.valid).toBe(true)
+      expect(every(values(res.validators), x => x && x.valid)).toBe(true)
       expect(res).toMatchSnapshot()
     },
     elevenSeconds
@@ -74,6 +92,7 @@ describe('validation tests', () => {
     async () => {
       const res = await validate('~@oftn.org')
       expect(res.valid).toBe(true)
+      expect(every(values(res.validators), x => x && x.valid)).toBe(true)
       expect(res).toMatchSnapshot()
     },
     elevenSeconds
@@ -84,6 +103,7 @@ describe('validation tests', () => {
     async () => {
       const res = await validate('info@davidalbertoadler.com')
       expect(res.valid).toBe(true)
+      expect(every(values(res.validators), x => x && x.valid)).toBe(true)
       expect(res).toMatchSnapshot()
     },
     elevenSeconds

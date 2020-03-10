@@ -16,7 +16,7 @@ Object {
     },
     "smtp": Object {
       "reason": "The mail address that you specified was not syntactically correct.",
-      "valid": true,
+      "valid": false,
     },
     "typo": Object {
       "valid": true,
@@ -35,7 +35,7 @@ Object {
     },
     "mx": Object {
       "reason": "MX record not found",
-      "valid": true,
+      "valid": false,
     },
     "regex": Object {
       "valid": true,
@@ -66,7 +66,7 @@ Object {
     },
     "smtp": Object {
       "reason": "Invalid Mailbox",
-      "valid": true,
+      "valid": false,
     },
     "typo": Object {
       "valid": true,
@@ -91,7 +91,7 @@ Object {
     },
     "smtp": Object {
       "reason": "Invalid Mailbox",
-      "valid": true,
+      "valid": false,
     },
     "typo": Object {
       "valid": true,
@@ -113,7 +113,7 @@ Object {
     },
     "regex": Object {
       "reason": "Invalid regex",
-      "valid": true,
+      "valid": false,
     },
     "smtp": Object {
       "valid": false,
@@ -144,7 +144,7 @@ Object {
     },
     "typo": Object {
       "reason": "Likely typo, suggested email: david@gmail.com",
-      "valid": true,
+      "valid": false,
     },
   },
 }
@@ -157,7 +157,7 @@ Object {
   "validators": Object {
     "disposable": Object {
       "reason": "Email was created using a disposable email service",
-      "valid": true,
+      "valid": false,
     },
     "mx": Object {
       "valid": false,

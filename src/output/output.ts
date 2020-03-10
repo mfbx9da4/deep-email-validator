@@ -29,6 +29,7 @@ export const createOutput = (
     const levelOut: SubOutputFormat = { valid }
     if (level === failLevel) {
       valid = false
+      levelOut.valid = false
       levelOut.reason = failReason
     }
     out.validators[level] = levelOut
