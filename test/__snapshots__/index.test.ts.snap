@@ -1,5 +1,30 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`validation tests fails later with malformed regex 1`] = `
+Object {
+  "reason": "smtp",
+  "valid": false,
+  "validators": Object {
+    "disposable": Object {
+      "valid": true,
+    },
+    "mx": Object {
+      "valid": true,
+    },
+    "regex": Object {
+      "valid": true,
+    },
+    "smtp": Object {
+      "reason": "The mail address that you specified was not syntactically correct.",
+      "valid": true,
+    },
+    "typo": Object {
+      "valid": true,
+    },
+  },
+}
+`;
+
 exports[`validation tests fails with bad dns 1`] = `
 Object {
   "reason": "mx",
@@ -150,7 +175,7 @@ Object {
 }
 `;
 
-exports[`validation tests passes 1`] = `
+exports[`validation tests passes when valid special char 1`] = `
 Object {
   "valid": true,
   "validators": Object {
@@ -173,7 +198,30 @@ Object {
 }
 `;
 
-exports[`validation tests passes 2`] = `
+exports[`validation tests passes when valid wildcard 1`] = `
+Object {
+  "valid": true,
+  "validators": Object {
+    "disposable": Object {
+      "valid": true,
+    },
+    "mx": Object {
+      "valid": true,
+    },
+    "regex": Object {
+      "valid": true,
+    },
+    "smtp": Object {
+      "valid": true,
+    },
+    "typo": Object {
+      "valid": true,
+    },
+  },
+}
+`;
+
+exports[`validation tests passes when we skip smtp validation 1`] = `
 Object {
   "valid": true,
   "validators": Object {
