@@ -6,25 +6,73 @@ import { checkSMTP } from './smtp/smtp'
 import { checkDisposable } from './disposable/disposable'
 import './types'
 
+const defaultOptions = {
+  email: 'name@example.org',
+  sender: 'name@example.org',
+  validateRegex: true,
+  validateMx: true,
+  validateTypo: true,
+  validateDisposable: true,
+  validateSMTP: true,
+}
+
+type ValidatorOptions = {
+  email: string
+  sender?: string
+  validateRegex?: boolean
+  validateMx?: boolean
+  validateTypo?: boolean
+  validateDisposable?: boolean
+  validateSMTP?: boolean
+}
+
+type ValidatorOptionsFinal = {
+  email: string
+  sender: string
+  validateRegex: boolean
+  validateMx: boolean
+  validateTypo: boolean
+  validateDisposable: boolean
+  validateSMTP: boolean
+}
+
 export async function validate(
-  recipient: string,
-  sender: string = 'name@example.org'
+  emailOrOptions: string | ValidatorOptions
 ): Promise<OutputFormat> {
-  console.log('recipient', recipient)
-  if (!isEmail(recipient)) return createOutput('regex', 'Invalid regex')
+  let email: string
+  let options: ValidatorOptionsFinal = defaultOptions
+  if (typeof emailOrOptions === 'string') {
+    email = emailOrOptions
+  } else {
+    email = emailOrOptions.email
+    options = { ...options, ...emailOrOptions }
+  }
 
-  const typoResponse = await checkTypo(recipient)
-  if (typoResponse) return createOutput('typo', typoResponse)
+  if (options.validateRegex && !isEmail(email))
+    return createOutput('regex', 'Invalid regex')
 
-  const domain = recipient.split('@')[1]
+  if (options.validateTypo) {
+    const typoResponse = await checkTypo(email)
+    if (typoResponse) return createOutput('typo', typoResponse)
+  }
 
-  const disposableResponse = await checkDisposable(domain)
-  if (disposableResponse) return createOutput('disposable', disposableResponse)
+  const domain = email.split('@')[1]
 
-  const mx = await getBestMx(domain)
-  if (!mx) return createOutput('mx', 'MX record not found')
+  if (options.validateDisposable) {
+    const disposableResponse = await checkDisposable(domain)
+    if (disposableResponse)
+      return createOutput('disposable', disposableResponse)
+  }
 
-  return checkSMTP(sender, recipient, mx.exchange)
+  if (options.validateMx) {
+    const mx = await getBestMx(domain)
+    if (!mx) return createOutput('mx', 'MX record not found')
+    if (options.validateSMTP) {
+      return checkSMTP(options.sender, email, mx.exchange)
+    }
+  }
+
+  return createOutput()
 }
 
 async function main() {
