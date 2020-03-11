@@ -6,7 +6,7 @@ const filename = 'disposable_email_blocklist.conf'
 let disposableDomains: Set<string> = new Set()
 
 const readDomainsFromFile = () => {
-  const text = readFileSync(`./disposable/${filename}`)
+  const text = readFileSync(`./data/${filename}`)
   disposableDomains = new Set(text.toString().split('\n'))
 }
 
