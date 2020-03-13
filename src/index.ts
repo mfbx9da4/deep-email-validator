@@ -1,55 +1,22 @@
-import isEmail from 'validator/lib/isEmail'
-import { OutputFormat, createOutput } from './output/output'
+import { isEmail } from './regex/regex'
 import { checkTypo } from './typo/typo'
 import { getBestMx } from './dns/dns'
 import { checkSMTP } from './smtp/smtp'
 import { checkDisposable } from './disposable/disposable'
+import { getOptions, ValidatorOptions } from './options/options'
+import { OutputFormat, createOutput } from './output/output'
 import './types'
-
-const defaultOptions = {
-  email: 'name@example.org',
-  sender: 'name@example.org',
-  validateRegex: true,
-  validateMx: true,
-  validateTypo: true,
-  validateDisposable: true,
-  validateSMTP: true,
-}
-
-type ValidatorOptions = {
-  email: string
-  sender?: string
-  validateRegex?: boolean
-  validateMx?: boolean
-  validateTypo?: boolean
-  validateDisposable?: boolean
-  validateSMTP?: boolean
-}
-
-type ValidatorOptionsFinal = {
-  email: string
-  sender: string
-  validateRegex: boolean
-  validateMx: boolean
-  validateTypo: boolean
-  validateDisposable: boolean
-  validateSMTP: boolean
-}
 
 export async function validate(
   emailOrOptions: string | ValidatorOptions
 ): Promise<OutputFormat> {
-  let email: string
-  let options: ValidatorOptionsFinal = defaultOptions
-  if (typeof emailOrOptions === 'string') {
-    email = emailOrOptions
-  } else {
-    email = emailOrOptions.email
-    options = { ...options, ...emailOrOptions }
-  }
+  const options = getOptions(emailOrOptions)
+  const email = options.email
 
-  if (options.validateRegex && !isEmail(email))
-    return createOutput('regex', 'Invalid regex')
+  if (options.validateRegex) {
+    const regexResponse = isEmail(email)
+    if (regexResponse) return createOutput('regex', regexResponse)
+  }
 
   if (options.validateTypo) {
     const typoResponse = await checkTypo(email)

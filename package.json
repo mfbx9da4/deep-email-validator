@@ -41,23 +41,21 @@
   "dependencies": {
     "axios": "^0.19.2",
     "lodash": "^4.17.15",
-    "mailcheck": "^1.1.1",
-    "validator": "^12.2.0"
+    "mailcheck": "^1.1.1"
   },
   "devDependencies": {
-    "typescript": "^3.8.3",
     "@types/eslint": "^6.1.1",
     "@types/jest": "^24.0.23",
     "@types/lodash": "^4.14.141",
     "@types/mailcheck": "^1.1.31",
     "@types/node": "^12.7.8",
-    "@types/validator": "^12.0.1",
     "@typescript-eslint/eslint-plugin": "^2.3.1",
     "@typescript-eslint/parser": "^2.3.1",
     "eslint": "^6.4.0",
     "jest": "^24.9.0",
     "nodemon": "^1.19.2",
     "ts-jest": "^24.1.0",
-    "ts-node": "^8.4.1"
+    "ts-node": "^8.4.1",
+    "typescript": "^3.8.3"
   }
 }

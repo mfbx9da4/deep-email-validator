@@ -112,7 +112,7 @@ Object {
       "valid": false,
     },
     "regex": Object {
-      "reason": "Invalid regex",
+      "reason": "Email does not contain \\"@\\".",
       "valid": false,
     },
     "smtp": Object {
