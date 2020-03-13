@@ -15,7 +15,7 @@ Object {
       "valid": true,
     },
     "smtp": Object {
-      "reason": "The mail address that you specified was not syntactically correct.",
+      "reason": "SMTP Error: The mail address that you specified was not syntactically correct.",
       "valid": false,
     },
     "typo": Object {
@@ -65,7 +65,7 @@ Object {
       "valid": true,
     },
     "smtp": Object {
-      "reason": "Invalid Mailbox",
+      "reason": "Mailbox not found.",
       "valid": false,
     },
     "typo": Object {
@@ -90,7 +90,7 @@ Object {
       "valid": true,
     },
     "smtp": Object {
-      "reason": "Invalid Mailbox",
+      "reason": "Mailbox not found.",
       "valid": false,
     },
     "typo": Object {

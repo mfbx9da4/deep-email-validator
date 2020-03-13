@@ -39,7 +39,9 @@
     "run-debug": "nodemon --inspect dist/server.js"
   },
   "dependencies": {
+    "@types/disposable-email-domains": "^1.0.1",
     "axios": "^0.19.2",
+    "disposable-email-domains": "^1.0.53",
     "lodash": "^4.17.15",
     "mailcheck": "^1.1.1"
   },

@@ -320,6 +320,11 @@
   dependencies:
     "@babel/types" "^7.3.0"
 
+"@types/disposable-email-domains@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@types/disposable-email-domains/-/disposable-email-domains-1.0.1.tgz#b7675d79f941073bdb3e378d77025a20a3978bb7"
+  integrity sha1-t2ddeflBBzvbPjeNdwJaIKOXi7c=
+
 "@types/eslint-visitor-keys@^1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@types/eslint-visitor-keys/-/eslint-visitor-keys-1.0.0.tgz#1ee30d79544ca84d68d4b3cdb0af4f205663dd2d"
@@ -1153,6 +1158,11 @@ diff@^4.0.1:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/diff/-/diff-4.0.2.tgz#60f3aecb89d5fae520c11aa19efc2bb982aade7d"
   integrity sha512-58lmxKSA4BNyLz+HHMUzlOEpg09FV+ev6ZMe3vJihgdxzgcwZ8VoEEPmALCZG9LmqfVoNMMKpttIYTVG6uDY7A==
+
+disposable-email-domains@^1.0.53:
+  version "1.0.53"
+  resolved "https://registry.yarnpkg.com/disposable-email-domains/-/disposable-email-domains-1.0.53.tgz#0025fb525ca518e865d8af9e2ac407544e434b74"
+  integrity sha512-nutItDoDcGZxrRj66I/0iLS9H3np4Pq2CCAUR8vWwMyu0vcTgSv+xHFEf9897wP/JBavfN1kyG31WKsUTPpx3A==
 
 doctrine@^3.0.0:
   version "3.0.0"

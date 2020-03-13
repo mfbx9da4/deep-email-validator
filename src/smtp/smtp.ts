@@ -61,12 +61,12 @@ export const checkSMTP = async (
         if (hasCode(msg, 220) || hasCode(msg, 250)) {
           socket.emit('next', msg)
         } else if (hasCode(msg, 550)) {
-          socket.emit('fail', 'Invalid Mailbox')
+          socket.emit('fail', 'Mailbox not found.')
         } else {
           const [code] = Object.typedKeys(ErrorCodes).filter(x =>
             hasCode(msg, x)
           )
-          socket.emit('fail', ErrorCodes[code] || 'Unrecognized response')
+          socket.emit('fail', ErrorCodes[code] || 'Unrecognized SMTP response.')
         }
       })
     })
