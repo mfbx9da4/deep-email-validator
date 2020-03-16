@@ -6,7 +6,7 @@ const elevenSeconds = 11 * 1000
 
 describe('validation tests', () => {
   it('fails with bad regex', async () => {
-    const res = await validate('dav id@gmail.com')
+    const res = await validate('david.gmail.com')
     expect(res.valid).toBe(false)
     expect(res.reason).toBe('regex')
     expect(res.validators.regex?.valid).toBe(false)

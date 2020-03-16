@@ -39,11 +39,11 @@
     "run-debug": "nodemon --inspect dist/server.js"
   },
   "dependencies": {
+    "@types/disposable-email-domains": "^1.0.1",
     "axios": "^0.19.2",
-    "jest": "^25.1.0",
+    "disposable-email-domains": "^1.0.53",
     "lodash": "^4.17.15",
-    "mailcheck": "^1.1.1",
-    "validator": "^12.2.0"
+    "mailcheck": "^1.1.1"
   },
   "devDependencies": {
     "@types/eslint": "^6.1.1",
@@ -51,8 +51,8 @@
     "@types/lodash": "^4.14.141",
     "@types/mailcheck": "^1.1.31",
     "@types/node": "^12.7.8",
-    "@types/validator": "^12.0.1",
     "@typescript-eslint/eslint-plugin": "^2.3.1",
+    "jest": "^25.1.0",
     "@typescript-eslint/parser": "^2.3.1",
     "eslint": "^6.4.0",
     "nodemon": "^1.19.2",
