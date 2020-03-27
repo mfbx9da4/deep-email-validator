@@ -13,5 +13,13 @@ export const getBestMx = async (
   domain: string
 ): Promise<dns.MxRecord | undefined> => {
   const addresses = await getMx(domain)
-  return addresses[0]
+  let bestIndex = 0
+
+  for (let i = 0; i < addresses.length; i++) {
+    if (addresses[i].priority < addresses[bestIndex].priority) {
+      bestIndex = i
+    }
+  }
+
+  return addresses[bestIndex]
 }
