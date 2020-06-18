@@ -25,15 +25,19 @@ export const checkSMTP = async (
 
     socket.on('fail', msg => {
       r(createOutput('smtp', msg))
-      socket.write(`quit\r\n`)
-      socket.end()
-      socket.destroy()
+      if (socket.writable && !socket.destroyed) {
+        socket.write(`quit\r\n`)
+        socket.end()
+        socket.destroy()
+      }
     })
 
     socket.on('success', () => {
-      socket.write(`quit\r\n`)
-      socket.end()
-      socket.destroy()
+      if (socket.writable && !socket.destroyed) {
+        socket.write(`quit\r\n`)
+        socket.end()
+        socket.destroy()
+      }
       r(createOutput())
     })
 
@@ -45,7 +49,11 @@ export const checkSMTP = async (
     let i = 0
     socket.on('next', () => {
       if (i < 3) {
-        socket.write(commands[i++])
+        if (socket.writable) {
+          socket.write(commands[i++])
+        } else {
+          socket.emit('fail', 'SMTP communication unexpectedly closed.')
+        }
       } else {
         socket.emit('success')
       }
