@@ -100,6 +100,31 @@ Object {
 }
 `;
 
+exports[`validation tests fails with bad mailbox 3`] = `
+Object {
+  "reason": "smtp",
+  "valid": false,
+  "validators": Object {
+    "disposable": Object {
+      "valid": true,
+    },
+    "mx": Object {
+      "valid": true,
+    },
+    "regex": Object {
+      "valid": true,
+    },
+    "smtp": Object {
+      "reason": "Mailbox not found.",
+      "valid": false,
+    },
+    "typo": Object {
+      "valid": true,
+    },
+  },
+}
+`;
+
 exports[`validation tests fails with bad regex 1`] = `
 Object {
   "reason": "regex",

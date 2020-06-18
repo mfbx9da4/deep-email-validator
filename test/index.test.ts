@@ -5,6 +5,15 @@ import { validate } from '../src/index'
 const elevenSeconds = 11 * 1000
 
 describe('validation tests', () => {
+  it('fails without sending data', async () => {
+    const res = await validate({
+      email: 'jubao@le.com',
+      sender: 'jubao@le.com',
+      validateTypo: false,
+      validateDisposable: false,
+    })
+    console.log(res)
+  }, 30000)
   it('fails with bad regex', async () => {
     const res = await validate('david.gmail.com')
     expect(res.valid).toBe(false)

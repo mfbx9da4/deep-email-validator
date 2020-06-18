@@ -15,6 +15,7 @@ export const checkSMTP = async (
 ): Promise<OutputFormat> => {
   const timeout = 1000 * 10 // 10 seconds
   return new Promise(r => {
+    let receivedData: boolean = false;
     const socket = net.createConnection(25, exchange)
     socket.setEncoding('ascii')
     socket.setTimeout(timeout)
@@ -22,7 +23,11 @@ export const checkSMTP = async (
       log('error', error)
       socket.emit('fail', error)
     })
-
+    socket.on('close', hadError => {
+      if (!receivedData && !hadError) {
+        socket.emit('fail', 'Mail server closed connection without sending any data.')
+      }
+    })
     socket.on('fail', msg => {
       r(createOutput('smtp', msg))
       if (socket.writable && !socket.destroyed) {
@@ -65,6 +70,7 @@ export const checkSMTP = async (
 
     socket.on('connect', () => {
       socket.on('data', msg => {
+        receivedData = true;
         log('data', msg)
         if (hasCode(msg, 220) || hasCode(msg, 250)) {
           socket.emit('next', msg)
