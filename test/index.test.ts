@@ -12,8 +12,11 @@ describe('validation tests', () => {
       validateTypo: false,
       validateDisposable: false,
     })
-    console.log(res)
-  }, 30000)
+    expect(res.valid).toBe(false)
+    expect(res.reason).toBe('smtp')
+    expect(res.validators.smtp?.valid).toBe(false)
+    expect(res).toMatchSnapshot()
+  })
   it('fails with bad regex', async () => {
     const res = await validate('david.gmail.com')
     expect(res.valid).toBe(false)
