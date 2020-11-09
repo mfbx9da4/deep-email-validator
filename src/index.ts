@@ -42,12 +42,4 @@ export async function validate(
   return createOutput()
 }
 
-async function main() {
-  if (process.argv[2]) {
-    const res = await validate(process.argv[2])
-    console.log(JSON.stringify(res, null, 2))
-  }
-}
-main()
-
 export default validate
