@@ -15,6 +15,12 @@ Validates emails based on regex, common typos, disposable email blacklists, DNS 
 Install like so
 
 ```
+npm i add deep-email-validator --save
+```
+
+or with yarn
+
+```
 yarn add deep-email-validator
 ```
 
