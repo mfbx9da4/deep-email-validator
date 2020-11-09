@@ -15,6 +15,7 @@ export const checkSMTP = async (
 ): Promise<OutputFormat> => {
   const timeout = 1000 * 10 // 10 seconds
   return new Promise(r => {
+    let receivedData: boolean = false;
     const socket = net.createConnection(25, exchange)
     socket.setEncoding('ascii')
     socket.setTimeout(timeout)
@@ -22,18 +23,26 @@ export const checkSMTP = async (
       log('error', error)
       socket.emit('fail', error)
     })
-
+    socket.on('close', hadError => {
+      if (!receivedData && !hadError) {
+        socket.emit('fail', 'Mail server closed connection without sending any data.')
+      }
+    })
     socket.on('fail', msg => {
       r(createOutput('smtp', msg))
-      socket.write(`quit\r\n`)
-      socket.end()
-      socket.destroy()
+      if (socket.writable && !socket.destroyed) {
+        socket.write(`quit\r\n`)
+        socket.end()
+        socket.destroy()
+      }
     })
 
     socket.on('success', () => {
-      socket.write(`quit\r\n`)
-      socket.end()
-      socket.destroy()
+      if (socket.writable && !socket.destroyed) {
+        socket.write(`quit\r\n`)
+        socket.end()
+        socket.destroy()
+      }
       r(createOutput())
     })
 
@@ -45,7 +54,11 @@ export const checkSMTP = async (
     let i = 0
     socket.on('next', () => {
       if (i < 3) {
-        socket.write(commands[i++])
+        if (socket.writable) {
+          socket.write(commands[i++])
+        } else {
+          socket.emit('fail', 'SMTP communication unexpectedly closed.')
+        }
       } else {
         socket.emit('success')
       }
@@ -57,6 +70,7 @@ export const checkSMTP = async (
 
     socket.on('connect', () => {
       socket.on('data', msg => {
+        receivedData = true;
         log('data', msg)
         if (hasCode(msg, 220) || hasCode(msg, 250)) {
           socket.emit('next', msg)
