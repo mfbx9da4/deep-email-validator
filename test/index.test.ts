@@ -111,7 +111,7 @@ describe('validation tests', () => {
     elevenSeconds
   )
 
-  it(
+  it.only(
     'passes when valid wildcard',
     async () => {
       const res = await validate('info@davidalbertoadler.com')
