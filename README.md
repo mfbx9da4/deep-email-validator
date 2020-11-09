@@ -55,7 +55,7 @@ const main = async () => {
   //   }
   // }
 
-  // Can also be called with these options
+  // Can also be called with these default options
   await validate({
     email: 'name@example.org',
     sender: 'name@example.org',
@@ -67,3 +67,5 @@ const main = async () => {
   })
 }
 ```
+
+[Default options can be found here](https://github.com/mfbx9da4/deep-email-validator/blob/cefb37abc6e42d3a1551d38f9706d4ff538226e5/src/options/options.ts#L1)
