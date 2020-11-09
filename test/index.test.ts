@@ -16,7 +16,8 @@ describe('validation tests', () => {
     expect(res.reason).toBe('smtp')
     expect(res.validators.smtp?.valid).toBe(false)
     expect(res).toMatchSnapshot()
-  })
+  }, elevenSeconds)
+
   it('fails with bad regex', async () => {
     const res = await validate('david.gmail.com')
     expect(res.valid).toBe(false)
