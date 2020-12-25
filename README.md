@@ -12,7 +12,11 @@ Validates email addresses based on regex, common typos, disposable email blackli
 - Validates mailbox exists on SMTP server.
 - Native typescript support.
 
+
+
 ## Getting Started
+
+Comaptible with nodejs only. Not browser ready.
 
 Install like so
 
