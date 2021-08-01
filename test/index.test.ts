@@ -120,4 +120,19 @@ describe('validation tests', () => {
     },
     elevenSeconds
   )
+
+  it(
+    'passes with custom TLD',
+    async () => {
+      const res = await validate({
+        email: 'info@utob.ir',
+        validateSMTP: false,
+        additionalTopLevelDomains: ['ir']
+      })
+      expect(res.valid).toBe(true)
+      expect(every(values(res.validators), x => x && x.valid)).toBe(true)
+      expect(res).toMatchSnapshot()
+    },
+    elevenSeconds
+  )
 })

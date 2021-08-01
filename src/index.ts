@@ -19,7 +19,7 @@ export async function validate(
   }
 
   if (options.validateTypo) {
-    const typoResponse = await checkTypo(email)
+    const typoResponse = await checkTypo(email, options.additionalTopLevelDomains)
     if (typoResponse) return createOutput('typo', typoResponse)
   }
 

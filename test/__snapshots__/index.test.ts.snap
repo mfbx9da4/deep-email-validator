@@ -316,3 +316,26 @@ Object {
   },
 }
 `;
+
+exports[`validation tests passes with custom TLD 1`] = `
+Object {
+  "valid": true,
+  "validators": Object {
+    "disposable": Object {
+      "valid": true,
+    },
+    "mx": Object {
+      "valid": true,
+    },
+    "regex": Object {
+      "valid": true,
+    },
+    "smtp": Object {
+      "valid": true,
+    },
+    "typo": Object {
+      "valid": true,
+    },
+  },
+}
+`;
