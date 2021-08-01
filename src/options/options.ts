@@ -17,8 +17,12 @@ type Options = {
   validateSMTP: boolean
 }
 
-export type ValidatorOptions = Partial<Options> & { email: string }
-type ValidatorOptionsFinal = Options & { email: string }
+type MailCheckOptions = {
+  additionalTopLevelDomains?: string[]
+}
+
+export type ValidatorOptions = Partial<Options> & { email: string } & MailCheckOptions
+type ValidatorOptionsFinal = Options & { email: string } & MailCheckOptions
 
 export function getOptions(
   emailOrOptions: string | ValidatorOptions
