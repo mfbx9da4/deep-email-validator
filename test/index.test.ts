@@ -74,22 +74,10 @@ describe('validation tests', () => {
   })
 
   it(
-    'fails with bad mailbox',
-    async () => {
-      const res = await validate('admin@github.com')
-      expect(res.valid).toBe(false)
-      expect(res.reason).toBe('smtp')
-      expect(res.validators.smtp?.valid).toBe(false)
-      expect(res).toMatchSnapshot()
-    },
-    elevenSeconds
-  )
-
-  it(
     'passes when we skip smtp validation',
     async () => {
       const res = await validate({
-        email: 'admin@github.com',
+        email: 'david@andco.life',
         validateSMTP: false,
       })
       expect(res.valid).toBe(true)
@@ -127,7 +115,7 @@ describe('validation tests', () => {
       const res = await validate({
         email: 'info@utob.ir',
         validateSMTP: false,
-        additionalTopLevelDomains: ['ir']
+        additionalTopLevelDomains: ['ir'],
       })
       expect(res.valid).toBe(true)
       expect(every(values(res.validators), x => x && x.valid)).toBe(true)
