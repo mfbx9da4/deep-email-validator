@@ -28,7 +28,7 @@ export const checkSMTP = async (
         socket.emit('fail', 'Mail server closed connection without sending any data.')
       }
     })
-    socket.on('fail', msg => {
+    socket.once('fail', msg => {
       r(createOutput('smtp', msg))
       if (socket.writable && !socket.destroyed) {
         socket.write(`quit\r\n`)
