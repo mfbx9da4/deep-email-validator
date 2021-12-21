@@ -7,11 +7,10 @@ type TypoSuggestion = {
 }
 
 export const checkTypo = async (email: string, additionalTLDs?: string[]): Promise<string | undefined> =>
-  new Promise(r =>
-  {
+  new Promise(r => {
     let topLevelDomains = undefined
     if (additionalTLDs && additionalTLDs.length > 0) {
-        topLevelDomains = [...mailCheck.defaultTopLevelDomains, ...additionalTLDs]
+      topLevelDomains = [...mailCheck.defaultTopLevelDomains, ...additionalTLDs]
     }
     mailCheck.run({
       email,
@@ -19,7 +18,7 @@ export const checkTypo = async (email: string, additionalTLDs?: string[]): Promi
       suggested: (suggestion: TypoSuggestion) => {
         r(`Likely typo, suggested email: ${suggestion.full}`)
       },
-      empty: function() {
+      empty: function () {
         r()
       },
     })

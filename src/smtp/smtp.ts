@@ -8,14 +8,10 @@ const log = (...args: unknown[]) => {
   }
 }
 
-export const checkSMTP = async (
-  sender: string,
-  recipient: string,
-  exchange: string
-): Promise<OutputFormat> => {
+export const checkSMTP = async (sender: string, recipient: string, exchange: string): Promise<OutputFormat> => {
   const timeout = 1000 * 10 // 10 seconds
   return new Promise(r => {
-    let receivedData: boolean = false;
+    let receivedData = false
     const socket = net.createConnection(25, exchange)
     socket.setEncoding('ascii')
     socket.setTimeout(timeout)
@@ -46,11 +42,7 @@ export const checkSMTP = async (
       r(createOutput())
     })
 
-    const commands = [
-      `helo ${exchange}\r\n`,
-      `mail from: <${sender}>\r\n`,
-      `rcpt to: <${recipient}>\r\n`,
-    ]
+    const commands = [`helo ${exchange}\r\n`, `mail from: <${sender}>\r\n`, `rcpt to: <${recipient}>\r\n`]
     let i = 0
     socket.on('next', () => {
       if (i < 3) {
@@ -70,16 +62,14 @@ export const checkSMTP = async (
 
     socket.on('connect', () => {
       socket.on('data', msg => {
-        receivedData = true;
+        receivedData = true
         log('data', msg)
         if (hasCode(msg, 220) || hasCode(msg, 250)) {
           socket.emit('next', msg)
         } else if (hasCode(msg, 550)) {
           socket.emit('fail', 'Mailbox not found.')
         } else {
-          const [code] = Object.typedKeys(ErrorCodes).filter(x =>
-            hasCode(msg, x)
-          )
+          const [code] = Object.typedKeys(ErrorCodes).filter(x => hasCode(msg, x))
           socket.emit('fail', ErrorCodes[code] || 'Unrecognized SMTP response.')
         }
       })

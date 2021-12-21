@@ -9,9 +9,7 @@ export const getMx = async (domain: string): Promise<dns.MxRecord[]> => {
   )
 }
 
-export const getBestMx = async (
-  domain: string
-): Promise<dns.MxRecord | undefined> => {
+export const getBestMx = async (domain: string): Promise<dns.MxRecord | undefined> => {
   const addresses = await getMx(domain)
   let bestIndex = 0
 

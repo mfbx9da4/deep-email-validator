@@ -22,9 +22,6 @@ export const ErrorCodes = {
   554: 'SMTP Error: The mail transaction has failed for unknown causes.',
 }
 
-export const hasCode = (
-  message: Buffer,
-  code: keyof typeof ErrorCodes
-): boolean => {
+export const hasCode = (message: Buffer, code: keyof typeof ErrorCodes): boolean => {
   return message.indexOf(`${code}`) === 0 || message.indexOf(`${code}\n`) > -1
 }

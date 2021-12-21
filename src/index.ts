@@ -7,9 +7,7 @@ import { getOptions, ValidatorOptions } from './options/options'
 import { OutputFormat, createOutput } from './output/output'
 import './types'
 
-export async function validate(
-  emailOrOptions: string | ValidatorOptions
-): Promise<OutputFormat> {
+export async function validate(emailOrOptions: string | ValidatorOptions): Promise<OutputFormat> {
   const options = getOptions(emailOrOptions)
   const email = options.email
 
@@ -27,8 +25,7 @@ export async function validate(
 
   if (options.validateDisposable) {
     const disposableResponse = await checkDisposable(domain)
-    if (disposableResponse)
-      return createOutput('disposable', disposableResponse)
+    if (disposableResponse) return createOutput('disposable', disposableResponse)
   }
 
   if (options.validateMx) {

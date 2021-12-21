@@ -14,10 +14,7 @@ export type OutputFormat = SubOutputFormat & {
   }
 }
 
-export const createOutput = (
-  failLevel?: Level,
-  failReason?: string
-): OutputFormat => {
+export const createOutput = (failLevel?: Level, failReason?: string): OutputFormat => {
   const out: OutputFormat = { valid: true, validators: {} }
   if (failLevel) {
     out.reason = failLevel

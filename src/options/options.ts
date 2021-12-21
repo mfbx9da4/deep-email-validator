@@ -24,9 +24,7 @@ type MailCheckOptions = {
 export type ValidatorOptions = Partial<Options> & { email: string } & MailCheckOptions
 type ValidatorOptionsFinal = Options & { email: string } & MailCheckOptions
 
-export function getOptions(
-  emailOrOptions: string | ValidatorOptions
-): ValidatorOptionsFinal {
+export function getOptions(emailOrOptions: string | ValidatorOptions): ValidatorOptionsFinal {
   let options: ValidatorOptionsFinal = defaultOptions
 
   if (typeof emailOrOptions === 'string') {

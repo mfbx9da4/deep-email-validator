@@ -5,6 +5,6 @@ declare global {
 }
 Object.typedKeys = Object.keys as any
 
-export type ElementType<
-  T extends ReadonlyArray<unknown>
-> = T extends ReadonlyArray<infer ElementType> ? ElementType : never
+export type ElementType<T extends ReadonlyArray<unknown>> = T extends ReadonlyArray<infer ElementType>
+  ? ElementType
+  : never
