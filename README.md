@@ -68,4 +68,22 @@ const main = async () => {
 }
 ```
 
-[Default options can be found here](https://github.com/mfbx9da4/deep-email-validator/blob/cefb37abc6e42d3a1551d38f9706d4ff538226e5/src/options/options.ts#L1)
+If you want to validate domains with TLDs that are not supported by default, you can use `additionalTopLevelDomains` option:
+
+```typescript
+await validate({
+  email: 'name@example.ir',
+  sender: 'name@example.ir',
+  validateRegex: true,
+  validateMx: true,
+  validateTypo: true,
+  validateDisposable: true,
+  validateSMTP: true,
+  additionalTopLevelDomains: [ 'ir' ]
+})
+```
+For a list of TLDs that are supported by default you can see [here](https://github.com/mailcheck/mailcheck/blob/afca031b4ce1cdc6e3ecbe88198f41b4835f81e3/src/mailcheck.js#L31).
+
+##
+
+[Default options can be found here](https://github.com/mfbx9da4/deep-email-validator/blob/8bbd9597a7ce435f0a77889a45daccdd5d7c3488/src/options/options.ts#L1)
