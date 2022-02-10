@@ -76,7 +76,7 @@ export const checkSMTP = async (sender: string, recipient: string, exchange: str
     })
     
     socket.on('end', () => {
-      r(createOutput('smtp', 'SMTP communication unexpectedly closed.'))
+      r(createOutput('smtp', 'Mail server closed connection without sending any data.'))
     });
   })
 }
