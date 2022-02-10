@@ -42,7 +42,7 @@ export const checkSMTP = async (sender: string, recipient: string, exchange: str
       r(createOutput())
     })
 
-    const commands = [`helo ${exchange}\r\n`, `mail from: <${sender}>\r\n`, `rcpt to: <${recipient}>\r\n`]
+    const commands = [`EHLO ${exchange}\r\n`, `MAIL FROM: <${sender}>\r\n`, `RCPT TO: <${recipient}>\r\n`]
     let i = 0
     socket.on('next', () => {
       if (i < 3) {
@@ -74,5 +74,9 @@ export const checkSMTP = async (sender: string, recipient: string, exchange: str
         }
       })
     })
+    
+    socket.on('end', () => {
+      r(createOutput('smtp', 'SMTP communication unexpectedly closed.'))
+    });
   })
 }
