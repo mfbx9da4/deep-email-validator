@@ -11,5 +11,8 @@ export const isEmail = (email: string): string | undefined => {
     if (domain.indexOf('.') === -1) {
       return 'Must contain a "." after the "@".'
     }
+    if (domain.endsWith('.')) {
+      return 'Must not end with "."'
+    }
   }
 }
