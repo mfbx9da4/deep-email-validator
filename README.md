@@ -29,7 +29,7 @@ yarn add deep-email-validator
 Use like so
 
 ```typescript
-import validate from 'deep-email-validator'
+import { validate } from 'deep-email-validator'
 const main = async () => {
   let res = await validate('asdf@gmail.com')
   // {
