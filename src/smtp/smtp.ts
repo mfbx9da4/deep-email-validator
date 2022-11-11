@@ -24,7 +24,7 @@ export const checkSMTP = async (sender: string, recipient: string, exchange: str
       if (!receivedData && !hadError) {
         socket.emit('fail', 'Mail server closed connection without sending any data.')
       }
-      if(!closed) {
+      if (!closed) {
         socket.emit('fail', 'Mail server closed connection unexpectedly.')
       }
     })
