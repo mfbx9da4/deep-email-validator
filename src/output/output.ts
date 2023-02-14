@@ -8,7 +8,12 @@ export type SubOutputFormat = {
 }
 
 type Level = ElementType<typeof OrderedLevels>
-export type OutputFormat = SubOutputFormat & {
+
+export interface GeneralOutputFormat extends SubOutputFormat {
+  reason?: Level
+}
+
+export type OutputFormat = GeneralOutputFormat & {
   validators: {
     [K in Level]?: SubOutputFormat
   }
