@@ -8,7 +8,12 @@ const log = (...args: unknown[]) => {
   }
 }
 
-export const checkSMTP = async (sender: string, recipient: string, exchange: string): Promise<OutputFormat> => {
+export const checkSMTP = async (
+  sender: string,
+  recipient: string,
+  exchange: string,
+  helo?: string
+): Promise<OutputFormat> => {
   const timeout = 1000 * 10 // 10 seconds
   return new Promise(r => {
     let receivedData = false
@@ -48,7 +53,7 @@ export const checkSMTP = async (sender: string, recipient: string, exchange: str
       r(createOutput())
     })
 
-    const commands = [`helo ${exchange}\r\n`, `mail from: <${sender}>\r\n`, `rcpt to: <${recipient}>\r\n`]
+    const commands = [`helo ${helo || exchange}\r\n`, `mail from: <${sender}>\r\n`, `rcpt to: <${recipient}>\r\n`]
     let i = 0
     socket.on('next', () => {
       if (i < 3) {
