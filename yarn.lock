@@ -423,10 +423,10 @@
   resolved "https://registry.yarnpkg.com/@types/color-name/-/color-name-1.1.1.tgz#1c1261bbeaa10a8055bbc5d8ab84b7b2afc846a0"
   integrity sha512-rr+OQyAjxze7GgWrSaJwydHStIhHq2lvY3BOC2Mj7KnzI7XK0Uw1TOOdI9lDoajEbSWLiYgoo4f1R51erQfhPQ==
 
-"@types/disposable-email-domains@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@types/disposable-email-domains/-/disposable-email-domains-1.0.1.tgz#b7675d79f941073bdb3e378d77025a20a3978bb7"
-  integrity sha1-t2ddeflBBzvbPjeNdwJaIKOXi7c=
+"@types/disposable-email-domains@^1.0.3":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@types/disposable-email-domains/-/disposable-email-domains-1.0.4.tgz#2d28452e2d3a97069217c7398932aa0cb4f32b62"
+  integrity sha512-AmKPD8vBZzvey/jeg+YAIH/xJE3D6edOXz+YUooSCcHesGzFyzke83kj1j4d0LUR9nkSHIRklUVdcAMleuWLpg==
 
 "@types/eslint-visitor-keys@^1.0.0":
   version "1.0.0"
