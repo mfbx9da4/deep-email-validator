@@ -41,7 +41,7 @@
   "dependencies": {
     "@types/disposable-email-domains": "^1.0.1",
     "axios": "^0.24.0",
-    "disposable-email-domains": "^1.0.59",
+    "disposable-email-domains": "^1.0.62",
     "mailcheck": "^1.1.1"
   },
   "devDependencies": {

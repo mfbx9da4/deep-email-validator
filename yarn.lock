@@ -1345,10 +1345,10 @@ diff@^4.0.1:
   resolved "https://registry.yarnpkg.com/diff/-/diff-4.0.2.tgz#60f3aecb89d5fae520c11aa19efc2bb982aade7d"
   integrity sha512-58lmxKSA4BNyLz+HHMUzlOEpg09FV+ev6ZMe3vJihgdxzgcwZ8VoEEPmALCZG9LmqfVoNMMKpttIYTVG6uDY7A==
 
-disposable-email-domains@^1.0.59:
-  version "1.0.59"
-  resolved "https://registry.yarnpkg.com/disposable-email-domains/-/disposable-email-domains-1.0.59.tgz#8b3670667dcef9d0d21b224de283d56d468913c2"
-  integrity sha512-45NbOP1Oboaddf0pD5mGnT+1msEifY6VUcR9Msq4zBHk2EeGv9PxiwuoynIfdGID1BSFR3U3egPfMbERkqXxUQ==
+disposable-email-domains@^1.0.62:
+  version "1.0.62"
+  resolved "https://registry.yarnpkg.com/disposable-email-domains/-/disposable-email-domains-1.0.62.tgz#bb66d3c387397dd8938aaf63a90505984f729265"
+  integrity sha512-LBQvhRw7mznQTPoyZbsmYeNOZt1pN5aCsx4BAU/3siVFuiM9f2oyKzUaB8v1jbxFjE3aYqYiMo63kAL4pHgfWQ==
 
 doctrine@^3.0.0:
   version "3.0.0"
