@@ -47,11 +47,11 @@
     "lint": "tsc --noEmit && eslint \"**/*.{js,ts}\" --quiet --fix"
   },
   "dependencies": {
-    "@types/disposable-email-domains": "^1.0.6",
     "disposable-email-domains": "^1.0.62",
     "mailcheck": "^1.1.1"
   },
   "devDependencies": {
+    "@types/disposable-email-domains": "^1.0.6",
     "@types/mailcheck": "^1.1.37",
     "@types/node": "^25.6.0",
     "@typescript-eslint/eslint-plugin": "^8.59.0",

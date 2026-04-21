@@ -21,5 +21,8 @@ export const isEmail = (email: string): string | undefined => {
   if (domain.indexOf('.') === -1) {
     return 'Must contain a "." after the "@".'
   }
+  if (/[\s\x00-\x1f\x7f]/.test(email)) {
+    return 'Email contains invalid characters.'
+  }
   return undefined
 }
