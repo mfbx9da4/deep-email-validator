@@ -165,7 +165,7 @@ Object {
       "valid": true,
     },
     "smtp": Object {
-      "reason": "Mail server closed connection without sending any data.",
+      "reason": "SMTP Error: The requested action was not done. Some error occurmiles in the mail server.",
       "valid": false,
     },
     "typo": Object {

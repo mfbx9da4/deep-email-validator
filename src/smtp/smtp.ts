@@ -8,7 +8,14 @@ const log = (...args: unknown[]) => {
   }
 }
 
+const sanitizeForSMTP = (value: string): string => {
+  return value.replace(/[\r\n]/g, '')
+}
+
 export const checkSMTP = async (sender: string, recipient: string, exchange: string): Promise<OutputFormat> => {
+  const sanitizedSender = sanitizeForSMTP(sender)
+  const sanitizedRecipient = sanitizeForSMTP(recipient)
+  const sanitizedExchange = sanitizeForSMTP(exchange)
   const timeout = 1000 * 10 // 10 seconds
   return new Promise(r => {
     let receivedData = false
@@ -48,7 +55,7 @@ export const checkSMTP = async (sender: string, recipient: string, exchange: str
       r(createOutput())
     })
 
-    const commands = [`helo ${exchange}\r\n`, `mail from: <${sender}>\r\n`, `rcpt to: <${recipient}>\r\n`]
+    const commands = [`helo ${sanitizedExchange}\r\n`, `mail from: <${sanitizedSender}>\r\n`, `rcpt to: <${sanitizedRecipient}>\r\n`]
     let i = 0
     socket.on('next', () => {
       if (i < 3) {
