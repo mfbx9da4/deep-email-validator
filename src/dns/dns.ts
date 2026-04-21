@@ -1,9 +1,9 @@
-import dns from 'dns'
+import dns from 'node:dns'
 
 export const getMx = async (domain: string): Promise<dns.MxRecord[]> => {
   return new Promise(r =>
-    dns.resolveMx(domain, (err, addresses) => {
-      if (err || !addresses) return r([] as dns.MxRecord[])
+    dns.resolveMx(domain, (err: NodeJS.ErrnoException | null, addresses: dns.MxRecord[] | undefined) => {
+      if (err || !addresses) return r([])
       r(addresses)
     })
   )
@@ -11,10 +11,13 @@ export const getMx = async (domain: string): Promise<dns.MxRecord[]> => {
 
 export const getBestMx = async (domain: string): Promise<dns.MxRecord | undefined> => {
   const addresses = await getMx(domain)
+  if (addresses.length === 0) return undefined
   let bestIndex = 0
 
   for (let i = 0; i < addresses.length; i++) {
-    if (addresses[i].priority < addresses[bestIndex].priority) {
+    const current = addresses[i]
+    const best = addresses[bestIndex]
+    if (current && best && current.priority < best.priority) {
       bestIndex = i
     }
   }

@@ -1,8 +1,6 @@
-import values from 'lodash/values'
-import every from 'lodash/every'
-import { validate } from '../src/index'
-
-import { isEmail } from '../src/regex/regex'
+import { describe, it, expect } from 'vitest'
+import { validate } from '../src/index.js'
+import { isEmail } from '../src/regex/regex.js'
 
 const elevenSeconds = 11 * 1000
 
@@ -39,7 +37,7 @@ describe('security: regex edge cases', () => {
   })
 
   it('rejects empty domain', () => {
-    expect(isEmail('user@')).toBe('Must contain a "." after the "@".')
+    expect(isEmail('user@')).toBe('Missing domain after "@".')
   })
 
   it('rejects empty string', () => {
@@ -128,7 +126,7 @@ describe('validation tests', () => {
         validateSMTP: false,
       })
       expect(res.valid).toBe(true)
-      expect(every(values(res.validators), x => x && x.valid)).toBe(true)
+      expect(Object.values(res.validators).every(x => x && x.valid)).toBe(true)
       expect(res).toMatchSnapshot()
     },
     elevenSeconds
@@ -139,7 +137,7 @@ describe('validation tests', () => {
     async () => {
       const res = await validate('~@oftn.org')
       expect(res.valid).toBe(true)
-      expect(every(values(res.validators), x => x && x.valid)).toBe(true)
+      expect(Object.values(res.validators).every(x => x && x.valid)).toBe(true)
       expect(res).toMatchSnapshot()
     },
     elevenSeconds
@@ -150,7 +148,7 @@ describe('validation tests', () => {
     async () => {
       const res = await validate('test@google.com')
       expect(res.valid).toBe(true)
-      expect(every(values(res.validators), x => x && x.valid)).toBe(true)
+      expect(Object.values(res.validators).every(x => x && x.valid)).toBe(true)
       expect(res).toMatchSnapshot()
     },
     elevenSeconds
@@ -165,7 +163,7 @@ describe('validation tests', () => {
         additionalTopLevelDomains: ['ir'],
       })
       expect(res.valid).toBe(true)
-      expect(every(values(res.validators), x => x && x.valid)).toBe(true)
+      expect(Object.values(res.validators).every(x => x && x.valid)).toBe(true)
       expect(res).toMatchSnapshot()
     },
     elevenSeconds

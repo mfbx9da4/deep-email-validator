@@ -10,15 +10,16 @@ export const isEmail = (email: string): string | undefined => {
   if (split.length > 2) {
     return 'Email must contain exactly one "@".'
   }
+  const local = split[0]
   const domain = split[1]
+  if (!local || local.length === 0) {
+    return 'Missing local part before "@".'
+  }
+  if (!domain || domain.length === 0) {
+    return 'Missing domain after "@".'
+  }
   if (domain.indexOf('.') === -1) {
     return 'Must contain a "." after the "@".'
   }
-  const local = split[0]
-  if (local.length === 0) {
-    return 'Missing local part before "@".'
-  }
-  if (domain.length === 0) {
-    return 'Missing domain after "@".'
-  }
+  return undefined
 }

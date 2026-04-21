@@ -19,7 +19,7 @@ export const checkTypo = async (email: string, additionalTLDs?: string[]): Promi
         r(`Likely typo, suggested email: ${suggestion.full}`)
       },
       empty: function () {
-        r()
+        r(undefined)
       },
     })
   })
