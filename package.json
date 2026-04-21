@@ -6,12 +6,19 @@
     "dist/**/*"
   ],
   "description": "Validates emails based on regex, common typos, disposable email blacklists, DNS records and SMTP server response.",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
     }
   },
   "engines": {
@@ -32,7 +39,7 @@
     "mx-records"
   ],
   "scripts": {
-    "build": "tsc",
+    "build": "tsup",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
     "prepare": "npm run build",
     "prepublishOnly": "npm test && npm run lint",
@@ -41,8 +48,7 @@
     "postversion": "git push && git push --tags",
     "test": "vitest run",
     "test:watch": "vitest",
-    "lint": "tsc --noEmit && eslint \"**/*.{js,ts}\" --quiet --fix",
-    "debug": "npm run build && npm run watch-debug"
+    "lint": "tsc --noEmit && eslint \"**/*.{js,ts}\" --quiet --fix"
   },
   "dependencies": {
     "@types/disposable-email-domains": "^1.0.6",
@@ -57,6 +63,7 @@
     "eslint": "^9.25.1",
     "nodemon": "^3.1.14",
     "prettier": "^3.8.3",
+    "tsup": "^8.5.1",
     "typescript": "^5.8.3",
     "vitest": "^4.1.5"
   }
