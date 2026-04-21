@@ -24,5 +24,5 @@ export const ErrorCodes = {
 
 export const hasCode = (message: string, code: keyof typeof ErrorCodes): boolean => {
   const codeStr = String(code)
-  return message.indexOf(codeStr) === 0 || message.indexOf(codeStr + '\n') > -1
+  return new RegExp(`^${codeStr}[\\s-]`).test(message) || new RegExp(`\\n${codeStr}[\\s-]`).test(message)
 }

@@ -30,28 +30,21 @@ export const checkSMTP = async (sender: string, recipient: string, exchange: str
     socket.on('close', (hadError: boolean) => {
       if (!receivedData && !hadError) {
         socket.emit('fail', 'Mail server closed connection without sending any data.')
-      }
-      if (!closed) {
+      } else if (!closed) {
         socket.emit('fail', 'Mail server closed connection unexpectedly.')
       }
     })
     socket.once('fail', (msg: unknown) => {
       closed = true
       r(createOutput('smtp', String(msg)))
-      if (socket.writable && !socket.destroyed) {
-        socket.write(`quit\r\n`)
-        socket.end()
-        socket.destroy()
-      }
+      socket.removeAllListeners()
+      socket.destroy()
     })
 
     socket.on('success', () => {
       closed = true
-      if (socket.writable && !socket.destroyed) {
-        socket.write(`quit\r\n`)
-        socket.end()
-        socket.destroy()
-      }
+      socket.removeAllListeners()
+      socket.destroy()
       r(createOutput())
     })
 

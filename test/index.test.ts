@@ -47,6 +47,14 @@ describe('security: regex edge cases', () => {
   it('rejects email without @', () => {
     expect(isEmail('usergmail.com')).toBe('Email does not contain "@".')
   })
+
+  it('rejects email with spaces', () => {
+    expect(isEmail('dav id@gmail.com')).toBe('Email contains invalid characters.')
+  })
+
+  it('rejects email with control characters', () => {
+    expect(isEmail('user\x00@gmail.com')).toBe('Email contains invalid characters.')
+  })
 })
 
 describe('validation tests', () => {
