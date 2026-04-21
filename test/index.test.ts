@@ -2,7 +2,54 @@ import values from 'lodash/values'
 import every from 'lodash/every'
 import { validate } from '../src/index'
 
+import { isEmail } from '../src/regex/regex'
+
 const elevenSeconds = 11 * 1000
+
+describe('security: multiple @ signs', () => {
+  it('rejects email with multiple @ signs via regex', () => {
+    expect(isEmail('me@gmail.com@bad.com')).toBe('Email must contain exactly one "@".')
+  })
+
+  it('rejects email with multiple @ signs via validate', async () => {
+    const res = await validate('me@gmail.com@bad.com')
+    expect(res.valid).toBe(false)
+    expect(res.reason).toBe('regex')
+  })
+
+  it('rejects angle-addr style input', async () => {
+    const res = await validate('me@gmail.com@<me@bad.com>')
+    expect(res.valid).toBe(false)
+    expect(res.reason).toBe('regex')
+  })
+
+  it('rejects email with multiple @ even when regex validation is disabled', async () => {
+    const res = await validate({
+      email: 'me@gmail.com@bad.com',
+      validateRegex: false,
+    })
+    expect(res.valid).toBe(false)
+    expect(res.reason).toBe('regex')
+  })
+})
+
+describe('security: regex edge cases', () => {
+  it('rejects empty local part', () => {
+    expect(isEmail('@gmail.com')).toBe('Missing local part before "@".')
+  })
+
+  it('rejects empty domain', () => {
+    expect(isEmail('user@')).toBe('Must contain a "." after the "@".')
+  })
+
+  it('rejects empty string', () => {
+    expect(isEmail('')).toBe('Email not provided')
+  })
+
+  it('rejects email without @', () => {
+    expect(isEmail('usergmail.com')).toBe('Email does not contain "@".')
+  })
+})
 
 describe('validation tests', () => {
   it('fails without sending data', async () => {
@@ -101,7 +148,7 @@ describe('validation tests', () => {
   it(
     'passes when valid wildcard',
     async () => {
-      const res = await validate('info@davidalbertoadler.com')
+      const res = await validate('test@google.com')
       expect(res.valid).toBe(true)
       expect(every(values(res.validators), x => x && x.valid)).toBe(true)
       expect(res).toMatchSnapshot()

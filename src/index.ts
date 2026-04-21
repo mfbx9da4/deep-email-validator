@@ -21,7 +21,11 @@ export async function validate(emailOrOptions: string | ValidatorOptions): Promi
     if (typoResponse) return createOutput('typo', typoResponse)
   }
 
-  const domain = email.split('@')[1]
+  const emailParts = email.split('@')
+  if (emailParts.length !== 2) {
+    return createOutput('regex', 'Email must contain exactly one "@".')
+  }
+  const domain = emailParts[1]
 
   if (options.validateDisposable) {
     const disposableResponse = await checkDisposable(domain)
