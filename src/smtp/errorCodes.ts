@@ -20,8 +20,8 @@ export const ErrorCodes = {
   552: 'SMTP Error: The mailbox that you are trying to reach has run out of space. Store the message and try again tomorrow or in a few days-after the user gets a chance to delete some messages.',
   553: 'SMTP Error: The mail address that you specified was not syntactically correct.',
   554: 'SMTP Error: The mail transaction has failed for unknown causes.',
-}
+} as const
 
-export const hasCode = (message: Buffer, code: keyof typeof ErrorCodes): boolean => {
+export const hasCode = (message: string, code: keyof typeof ErrorCodes): boolean => {
   return message.indexOf(`${code}`) === 0 || message.indexOf(`${code}\n`) > -1
 }

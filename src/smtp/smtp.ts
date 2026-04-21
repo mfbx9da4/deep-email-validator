@@ -1,9 +1,9 @@
-import net from 'net'
-import { OutputFormat, createOutput } from '../output/output'
-import { hasCode, ErrorCodes } from './errorCodes'
+import net from 'node:net'
+import { OutputFormat, createOutput } from '../output/output.js'
+import { hasCode, ErrorCodes } from './errorCodes.js'
 
 const log = (...args: unknown[]) => {
-  if (process.env.DEBUG === 'true') {
+  if (process.env['DEBUG'] === 'true') {
     console.log(...args)
   }
 }
@@ -23,11 +23,11 @@ export const checkSMTP = async (sender: string, recipient: string, exchange: str
     const socket = net.createConnection(25, exchange)
     socket.setEncoding('ascii')
     socket.setTimeout(timeout)
-    socket.on('error', error => {
+    socket.on('error', (error: Error) => {
       log('error', error)
       socket.emit('fail', error)
     })
-    socket.on('close', hadError => {
+    socket.on('close', (hadError: boolean) => {
       if (!receivedData && !hadError) {
         socket.emit('fail', 'Mail server closed connection without sending any data.')
       }
@@ -35,9 +35,9 @@ export const checkSMTP = async (sender: string, recipient: string, exchange: str
         socket.emit('fail', 'Mail server closed connection unexpectedly.')
       }
     })
-    socket.once('fail', msg => {
+    socket.once('fail', (msg: unknown) => {
       closed = true
-      r(createOutput('smtp', msg))
+      r(createOutput('smtp', String(msg)))
       if (socket.writable && !socket.destroyed) {
         socket.write(`quit\r\n`)
         socket.end()
@@ -59,9 +59,10 @@ export const checkSMTP = async (sender: string, recipient: string, exchange: str
     let i = 0
     socket.on('next', () => {
       if (i < 3) {
-        if (socket.writable) {
-          socket.write(commands[i++])
-        } else {
+        const cmd = commands[i++]
+        if (socket.writable && cmd) {
+          socket.write(cmd)
+        } else if (!socket.writable) {
           socket.emit('fail', 'SMTP communication unexpectedly closed.')
         }
       } else {
@@ -74,7 +75,7 @@ export const checkSMTP = async (sender: string, recipient: string, exchange: str
     })
 
     socket.on('connect', () => {
-      socket.on('data', msg => {
+      socket.on('data', (msg: string) => {
         receivedData = true
         log('data', msg)
         if (hasCode(msg, 220) || hasCode(msg, 250)) {
@@ -82,8 +83,8 @@ export const checkSMTP = async (sender: string, recipient: string, exchange: str
         } else if (hasCode(msg, 550)) {
           socket.emit('fail', 'Mailbox not found.')
         } else {
-          const [code] = Object.typedKeys(ErrorCodes).filter(x => hasCode(msg, x))
-          socket.emit('fail', ErrorCodes[code] || 'Unrecognized SMTP response.')
+          const code = Object.typedKeys(ErrorCodes).find(x => hasCode(msg, x))
+          socket.emit('fail', code ? ErrorCodes[code] : 'Unrecognized SMTP response.')
         }
       })
     })

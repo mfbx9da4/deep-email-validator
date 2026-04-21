@@ -1,16 +1,16 @@
-import { ElementType } from '../types'
+import { ElementType } from '../types.js'
 
 const OrderedLevels = ['regex', 'typo', 'disposable', 'mx', 'smtp'] as const
 
 export type SubOutputFormat = {
   valid: boolean
-  reason?: string
+  reason?: string | undefined
 }
 
 type Level = ElementType<typeof OrderedLevels>
 
 export interface GeneralOutputFormat extends SubOutputFormat {
-  reason?: Level
+  reason?: Level | undefined
 }
 
 export type OutputFormat = GeneralOutputFormat & {
@@ -26,8 +26,7 @@ export const createOutput = (failLevel?: Level, failReason?: string): OutputForm
     out.valid = false
   }
   let valid = true
-  for (let i = 0; i < OrderedLevels.length; i++) {
-    const level = OrderedLevels[i]
+  for (const level of OrderedLevels) {
     const levelOut: SubOutputFormat = { valid }
     if (level === failLevel) {
       valid = false
