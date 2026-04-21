@@ -111,7 +111,7 @@ describe('validation tests', () => {
   )
 
   it('fails with bad mailbox', async () => {
-    const res = await validate('david@andco.life')
+    const res = await validate('definitelynotreal@microsoft.com')
     expect(res.valid).toBe(false)
     expect(res.reason).toBe('smtp')
     expect(res.validators.smtp?.valid).toBe(false)
@@ -122,7 +122,7 @@ describe('validation tests', () => {
     'passes when we skip smtp validation',
     async () => {
       const res = await validate({
-        email: 'david@andco.life',
+        email: 'definitelynotreal@microsoft.com',
         validateSMTP: false,
       })
       expect(res.valid).toBe(true)
