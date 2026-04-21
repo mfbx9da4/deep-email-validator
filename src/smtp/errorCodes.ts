@@ -23,5 +23,6 @@ export const ErrorCodes = {
 } as const
 
 export const hasCode = (message: string, code: keyof typeof ErrorCodes): boolean => {
-  return message.indexOf(`${code}`) === 0 || message.indexOf(`${code}\n`) > -1
+  const codeStr = String(code)
+  return message.indexOf(codeStr) === 0 || message.indexOf(codeStr + '\n') > -1
 }
