@@ -26,7 +26,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/mfbx9da4/deep-email-validator"
+    "url": "git+https://github.com/mfbx9da4/deep-email-validator.git"
   },
   "author": "David Alberto Adler",
   "license": "MIT",
