@@ -40,12 +40,8 @@
   ],
   "scripts": {
     "build": "tsup",
-    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
+    "format": "prettier --write \"src/**/*.ts\"",
     "prepare": "npm run build",
-    "prepublishOnly": "npm test && npm run lint",
-    "preversion": "npm run lint",
-    "version": "npm run format && git add -A src",
-    "postversion": "git push && git push --tags",
     "test": "vitest run",
     "test:watch": "vitest",
     "lint": "tsc --noEmit && eslint \"**/*.{js,ts}\" --quiet --fix"
